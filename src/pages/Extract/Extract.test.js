@@ -48,7 +48,7 @@ describe("Extract Page", () => {
     global.Storage.prototype.getItem = jest
       .fn()
       .mockReturnValue(
-        '[{"title":"Salário","type":"out","category":"mensal","value":"3000","date":"Sat May 29 2021 22:54:39 GMT-0300 (Horário Padrão de Brasília)"}]'
+        '[{"title":"Fatura do cartão","type":"out","category":"mensal","value":"3000","date":"Sat May 29 2021 22:54:39 GMT-0300 (Horário Padrão de Brasília)"}]'
       );
 
     renderTransaction();
@@ -59,7 +59,7 @@ describe("Extract Page", () => {
     global.Storage.prototype.getItem = jest
       .fn()
       .mockReturnValue(
-        '[{"title":"Salário","type":"out","category":"mensal","value":"3000","date":"Sat May 29 2021 22:54:39 GMT-0300 (Horário Padrão de Brasília)"},' +
+        '[{"title":"Fatura do cartão","type":"out","category":"mensal","value":"3000","date":"Sat May 29 2021 22:54:39 GMT-0300 (Horário Padrão de Brasília)"},' +
           '{"title":"Salário","type":"in","category":"mensal","value":"3000","date":"Sat May 29 2021 22:54:39 GMT-0300 (Horário Padrão de Brasília)"}]'
       );
 
