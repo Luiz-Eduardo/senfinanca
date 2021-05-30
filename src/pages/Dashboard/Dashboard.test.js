@@ -1,0 +1,44 @@
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import ModalContextProvider from "../../context/Modal";
+import TransactionContextProvider from "../../context/Transactions";
+import Dashboard from "./index";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+
+function renderDashboard() {
+  return render(
+    <BrowserRouter>
+      <TransactionContextProvider>
+        <ModalContextProvider>
+          <Dashboard />
+        </ModalContextProvider>
+      </TransactionContextProvider>
+    </BrowserRouter>
+  );
+}
+
+describe("Dashboard Message", () => {
+  test("Should have a message to add a transaction", () => {
+    renderDashboard();
+
+    expect(
+      screen.getByText(
+        "You still doesn't have a transaction, please add at least one"
+      )
+    ).toBeInTheDocument();
+  });
+
+  test("Should have a transactions text", () => {
+    global.Storage.prototype.getItem = jest
+      .fn()
+      .mockReturnValue(
+        '[{"title":"Salário","type":"in","category":"mensal","value":"3000","date":"Sat May 29 2021 22:54:39 GMT-0300 (Horário Padrão de Brasília)"}]'
+      );
+
+    renderDashboard();
+    expect(screen.getByText("Transactions (1)")).toBeInTheDocument();
+
+    global.Storage.prototype.getItem.mockReset();
+  });
+});
